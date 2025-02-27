@@ -1,0 +1,174 @@
+---
+description: Project Roadmap
+globs: 
+alwaysApply: true
+---
+# S-Corp Expense Tracker Development Guide
+
+This document outlines an iterative approach to building our S-Corp Expense Tracker MVP. The roadmap prioritizes critical features to create a functional product as quickly as possible. Our development approach follows Test-Driven Development (TDD) principles.
+
+## Instructions for LLM Coding Agent
+
+### Development Process
+
+For each Job To Be Done (JTBD) story:
+
+1. **Write Tests First**: Create comprehensive unit and integration tests that validate all acceptance criteria.
+
+2. **Implement Solution**: Write clean, maintainable code that passes all tests.
+
+3. **Run Test Suite**: Execute the full test suite to ensure no regressions.
+
+4. **Commit Changes**: Write a descriptive commit message following our convention:
+   ```
+   [JTBD-X] Brief title
+   
+   - Implemented feature details
+   - Fixed related issues
+   - Added specific components
+   ```
+
+5. **Request Review**: Stop after completing each JTBD and request human pair programmer review before proceeding.
+
+### Development Best Practices
+
+- Leverage the linter to maintain code quality standards
+- Use the debugger with strategic breakpoints to troubleshoot complex issues
+- Implement error handling for all user inputs and external interactions
+- Keep components modular to support future extensions
+- Consider mobile experience for all UI implementations
+- Document any technical decisions that impact future phases
+
+Begin with Phase 1 (Core Expense Capture) and proceed sequentially through each JTBD.
+
+# S-Corp Expense Tracker: Jobs To Be Done (JTBD)
+
+## Phase 1: Core Expense Capture
+
+### JTBD-1: Record Basic Expense Information
+**Title:** Log Business Expense
+**Description:** As an S-corp owner, I want to quickly record my business expenses so I can track my spending and have proper documentation for tax purposes.
+
+**Acceptance Criteria:**
+- User can enter date, amount, vendor name, and select a basic category
+- Form validates required fields before submission
+- Submitted expense appears immediately in the expense list
+- User receives confirmation when expense is successfully saved
+- User can edit previously entered expenses
+- Mobile and desktop interfaces both support expense entry
+
+**Technical Note:** Implement client-side form validation to provide immediate feedback and reduce server load.
+
+### JTBD-2: Capture Receipt Images
+**Title:** Attach Receipt to Expense
+**Description:** As an S-corp owner, I want to attach digital images of receipts to my expense records so I have proper documentation for tax audits.
+
+**Acceptance Criteria:**
+- User can upload image files from their device
+- Mobile users can directly capture photos using their device camera
+- Images are compressed to reasonable file sizes without losing readability
+- Receipts are viewable alongside expense details
+- User can delete and replace receipt images if needed
+
+**Technical Note:** Consider using client-side image compression before upload to improve performance and reduce storage costs.
+
+### JTBD-3: View Expense History
+**Title:** Browse Expense Records
+**Description:** As an S-corp owner, I want to view my past expenses so I can review my spending history and find specific transactions.
+
+**Acceptance Criteria:**
+- Expenses are displayed in a list format with key details visible
+- List can be filtered by date range 
+- User can sort expenses by date, amount, or vendor
+- Tapping/clicking an expense shows full details and attached receipt
+- User interface remains responsive even with hundreds of expense records
+
+### JTBD-4: Secure Account Access
+**Title:** Create and Access Account
+**Description:** As an S-corp owner, I want to securely access my expense data across multiple devices so I can manage expenses anywhere.
+
+**Acceptance Criteria:**
+- User can register with email and secure password
+- User can log in from any device
+- User can log out
+- User can reset forgotten password
+- Session times out after period of inactivity
+- Only authenticated users can access expense data
+
+**Technical Note:** Implement proper password hashing and consider offering 2FA in a future iteration.
+
+### JTBD-5: Export Basic Data
+**Title:** Download Expense Data
+**Description:** As an S-corp owner, I want to export my expense data so I can share it with my accountant or import it into other financial systems.
+
+**Acceptance Criteria:**
+- User can export expense data in CSV format
+- Export includes all core expense details (date, amount, vendor, category)
+- User can select a date range for the export
+- Export process handles large data sets without timing out
+- Downloaded file uses a clear naming convention including date range
+
+## Phase 2: S-Corp Specific Functionality
+
+### JTBD-6: Categorize with Tax-Aligned Categories
+**Title:** Classify Expenses for Tax Purposes
+**Description:** As an S-corp owner, I want to categorize expenses according to IRS-recognized categories so I can easily prepare my tax filings.
+
+**Acceptance Criteria:**
+- System provides pre-defined categories aligned with Schedule C and Form 1120-S
+- Categories include common S-corp expenses (office supplies, travel, meals, etc.)
+- Special categories identify 50% deductible expenses (like meals)
+- User can add custom subcategories under main categories
+- When viewing expenses, user can filter by category
+
+**Technical Note:** Structure the category system to accommodate future tax code changes with minimal database modifications.
+
+### JTBD-7: Distinguish Personal vs. Business Expenses
+**Title:** Separate Personal and Business Spending
+**Description:** As an S-corp owner, I want to clearly mark which expenses are personal vs. business-related so I maintain the corporate veil and proper tax documentation.
+
+**Acceptance Criteria:**
+- Each expense can be flagged as "business" or "personal"
+- Personal expenses are visually distinct in the expense list
+- Reports can filter by or exclude personal expenses
+- User can mark personal expenses as "reimbursable" when relevant
+- Dashboard shows business-only totals by default
+
+### JTBD-8: Record Owner Transactions
+**Title:** Track Owner Payments and Investments
+**Description:** As an S-corp owner, I want to record salary payments and distributions to myself so I maintain the required distinction between these transaction types.
+
+**Acceptance Criteria:**
+- Special transaction type for recording owner salary payments
+- Separate transaction type for owner distributions
+- Ability to record owner equity contributions to the business
+- Dashboard displays YTD totals for salary vs. distributions
+- System warns if distribution-to-salary ratio appears potentially problematic
+
+**Technical Note:** Consider implementing a simple notification system that can be expanded later for tax obligation reminders.
+
+### JTBD-9: Visualize Expense Patterns
+**Title:** View Expense Dashboard
+**Description:** As an S-corp owner, I want to see visualizations of my expense patterns so I can quickly understand my business spending.
+
+**Acceptance Criteria:**
+- Dashboard shows monthly expense totals
+- Pie chart displays expenses by category
+- Year-to-date summary compares against previous periods
+- Dashboard loads quickly (under 3 seconds)
+- All visualizations are responsive on mobile devices
+- Data refreshes automatically when new expenses are added
+
+**Technical Note:** Use client-side rendering for charts to improve performance and reduce server load.
+
+### JTBD-10: Tag and Organize Expenses
+**Title:** Custom Expense Organization
+**Description:** As an S-corp owner, I want to add custom tags to expenses so I can organize them according to my business needs beyond standard categories.
+
+**Acceptance Criteria:**
+- User can create and apply custom tags to any expense
+- Multiple tags can be applied to a single expense
+- User can filter expense list by tag
+- Tags are searchable
+- Most used tags appear as suggestions when adding new tags
+- Tags can be renamed or deleted (with confirmation)
