@@ -12,7 +12,10 @@
 		"typecheck": "tsc",
 		"typegen": "wrangler types",
 		"preview": "pnpm run build && wrangler dev",
-		"cf-typegen": "wrangler types"
+		"cf-typegen": "wrangler types",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage"
 	},
 	"dependencies": {
 		"@remix-run/cloudflare": "^2.15.3",
@@ -25,10 +28,14 @@
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20250224.0",
 		"@remix-run/dev": "^2.15.3",
+		"@testing-library/dom": "^10.4.0",
+		"@testing-library/jest-dom": "^6.6.3",
+		"@testing-library/react": "^16.2.0",
 		"@types/react": "^18.2.20",
 		"@types/react-dom": "^18.2.7",
 		"@typescript-eslint/eslint-plugin": "^6.7.4",
 		"@typescript-eslint/parser": "^6.7.4",
+		"@vitejs/plugin-react": "^4.3.4",
 		"autoprefixer": "^10.4.19",
 		"eslint": "^8.38.0",
 		"eslint-import-resolver-typescript": "^3.6.1",
@@ -36,11 +43,13 @@
 		"eslint-plugin-jsx-a11y": "^6.7.1",
 		"eslint-plugin-react": "^7.33.2",
 		"eslint-plugin-react-hooks": "^4.6.0",
+		"jsdom": "^26.0.0",
 		"postcss": "^8.4.38",
 		"tailwindcss": "^3.4.4",
 		"typescript": "^5.1.6",
 		"vite": "^5.1.0",
 		"vite-tsconfig-paths": "^4.2.1",
+		"vitest": "^3.0.7",
 		"wrangler": "3.110.0"
 	},
 	"engines": {
